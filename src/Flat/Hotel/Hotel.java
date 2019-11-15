@@ -15,8 +15,8 @@ public class Hotel extends Dwelling {
 
     public int getCountStarsAllHotel()
     {
-        int countStars = 0;
-        for (int i = 0; i < getCountFloor(); i++)
+        int countStars = 1;
+        for (int i = 0; i < getCountFloor()-1; i++)
         {
             if(getFloor(i) instanceof HotelFloor) {
                 if (((HotelFloor) getFloor(i)).getCountStars() > ((HotelFloor) getFloor(i + 1)).getCountStars())
@@ -37,9 +37,9 @@ public class Hotel extends Dwelling {
             {
                 for(int j = 0; j < getFloor(i).getCountOnFloor(); j++)
                 {
-                    if (bestArea < (getFloor(i).getSpace(j).getArea() *coeff[i]))
+                    if (bestArea < (getFloor(i).getSpace(j).getArea() *coeff[((HotelFloor) getFloor(i)).getCountStars() - 1]))
                     {
-                        bestArea = getFloor(i).getSpace(j).getArea() *coeff[i];
+                        bestArea = getFloor(i).getSpace(j).getArea() *coeff[((HotelFloor) getFloor(i)).getCountStars() - 1];
                         bestSpace = getFloor(i).getSpace(j);
                     }
                 }

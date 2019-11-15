@@ -1,24 +1,49 @@
 package Building;
 
+import Flat.Hotel.*;
 import Office.*;
 import Flat.*;
 import Interface.*;
 import Exception.*;
 import java.io.*;
+import java.util.Iterator;
 
 public class Main {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, InexchangeableFloorsException, InexchangeableSpacesException {
         // write your code here
-        Office f1 = new Office();
-        Office f2 = new Office(45);
-        Office f3 = new Office(80, 3);
-        Office f4 = new Office(400, 3);
-        OfficeFloor df1 = new OfficeFloor(5);
-        OfficeFloor df2 = new OfficeFloor(new Office[]{f1, f2, f3, f4});
-        OfficeBuilding ob1 = new OfficeBuilding(new OfficeFloor[]{df1, df2});
+        Flat f1 = new Flat(80);
+        Flat f2 = new Flat(45);
+        Flat f3 = new Flat(75, 3);
+        Flat f4 = new Flat(300, 3);
+        HotelFloor df1 = new HotelFloor(5);
+        HotelFloor df2 = new HotelFloor(new Flat[]{f1, f2, f3, f4});
+        Hotel ob1 = new Hotel(new HotelFloor[]{df1, df2});
+
+        df1.setCountStars(5);
+        System.out.println(df1.getCountStars());
+        System.out.println(ob1.getBestSpace().getArea());
+        System.out.println(ob1.getCountStarsAllHotel());
 
 
+/*
+       Flat f1 = new Flat();
+        Flat f2 = new Flat(45);
+        Flat f3 = new Flat(80, 3);
+        Flat f4 = new Flat(75, 3);
+        DwellingFloor df1 = new DwellingFloor(new Flat[]{f1, f2, f3, f4});
+        DwellingFloor df2 = new DwellingFloor(5);
+        Dwelling d = new Dwelling(new DwellingFloor[]{df1, df2});
+        Iterator iterator = df1.iterator();
+
+
+        int i = 0;
+        while(iterator.hasNext()) {
+            System.out.println(iterator.next().);
+            System.out.println(df1.getSpace(i));
+            i++;
+        }
+*/
         //методы 4 лабораторной
         /*
         PlacementExchanger.exchangeFloorRooms(df1,0,df2, 0);

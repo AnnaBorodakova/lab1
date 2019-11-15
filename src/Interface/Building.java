@@ -16,5 +16,5 @@ public interface Building  extends Serializable {
     void addSpaceBuilding(int index, Space space);
     Space getBestSpace();
     void sort();
-   // java.util.Iterator iterator();
+    java.util.Iterator iterator();
 }

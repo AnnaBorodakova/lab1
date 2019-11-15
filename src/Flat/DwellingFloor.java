@@ -2,6 +2,8 @@ package Flat;
 import Interface.Floor;
 import Interface.Space;
 
+import java.util.Iterator;
+
 public class DwellingFloor implements Floor{
     Space[] masFlat;
 
@@ -82,5 +84,21 @@ public class DwellingFloor implements Floor{
             room = masFlat[i].getRoom();
         }
         return new Flat(maxArea, room);
+    }
+
+    public Iterator<Space> iterator()
+    {
+         return new Iterator<>() {
+                int count = 0;
+            @Override
+            public boolean hasNext() {
+                return count < masFlat.length && masFlat.length != 0;
+            }
+
+            @Override
+            public Space next() {
+                return masFlat[count++];
+            }
+        };
     }
 }

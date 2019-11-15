@@ -147,7 +147,21 @@ public class OfficeFloor implements Floor, Serializable {
         return office;
     }
 
-  //  public Iterator<> iterator(){
+    public Iterator<Space> iterator()
+    {
+        return new Iterator<Space>() {
+            Node temp = head;
+            int count = 0;
+            @Override
+            public boolean hasNext() {
+                return count < getCountOnFloor() && temp.next != head;
+            }
 
-   // }
+            @Override
+            public Space next() {
+                count++;
+                return (temp = temp.next).data;
+            }
+        };
+    }
 }

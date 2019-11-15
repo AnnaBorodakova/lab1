@@ -5,6 +5,7 @@ import Exception.SpaceIndexOutOfBoundsException;
 import Interface.*;
 
 import java.io.Serializable;
+import java.util.Iterator;
 
 public class OfficeBuilding implements Building, Serializable {
 
@@ -232,5 +233,23 @@ public class OfficeBuilding implements Building, Serializable {
         for (int i = 0; i < arr.length; i++) {
             System.out.println(arr[i].getArea());
         }
+    }
+
+    public Iterator<Floor> iterator()
+    {
+        return new Iterator<Floor>() {
+            Node temp = head;
+            int count = 0;
+            @Override
+            public boolean hasNext() {
+                return count < getCountFloor() && temp.next != head;
+            }
+
+            @Override
+            public Floor next() {
+                count++;
+                return (temp = temp.next).data;
+            }
+        };
     }
 }

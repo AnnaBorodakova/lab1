@@ -1,8 +1,9 @@
 package Interface;
 
 import java.io.Serializable;
+import java.util.Iterator;
 
-public interface Floor extends Serializable {
+public interface Floor extends Serializable, Iterable<Space>{
     int getCountOnFloor();
     int getAreaFloor();
     int getRoomFloor();
@@ -12,5 +13,5 @@ public interface Floor extends Serializable {
     void addSpace(int index, Space space);
     void deleteSpace(int index);
     Space getBestSpace();
-   // java.util.Iterator iterator();
+    Iterator<Space> iterator();
 }

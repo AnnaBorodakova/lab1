@@ -1,11 +1,14 @@
 package Building;
 
+import Flat.Dwelling;
+import Flat.DwellingFactory;
 import Interface.*;
 import Office.*;
-
 import java.io.*;
 
 public class Buildings {
+
+    private static BuildingFactory factory = new DwellingFactory();
 
     public static void outputBuilding (Building building, OutputStream out) throws IOException
     {
@@ -33,12 +36,12 @@ public class Buildings {
             Space[] spaces = new Space[countSpace];
             for (int j = 0; j < countSpace; j++)
             {
-                spaces[j] = new Office(stream.readInt(),stream.readInt());
+                spaces[j] = createSpace(stream.readInt(),stream.readInt());
             }
-            array[i] = new OfficeFloor(spaces);
+            array[i] = createFloor(spaces);
         }
         stream.close();
-        return new OfficeBuilding(array);
+        return createBuilding(array);
     }
 
     public static void writeBuilding (Building building, Writer out) throws IOException
@@ -74,11 +77,11 @@ public class Buildings {
                 int area = (int)token.nval;
                 token.nextToken();
                 int room = (int)token.nval;
-                spaces[j] = new Office(area,room);
+                spaces[j] = createSpace(area,room);
             }
-            array[i] = new OfficeFloor(spaces);
+            array[i] = createFloor(spaces);
         }
-        return new OfficeBuilding(array);
+        return createBuilding(array);
     }
 
     public static void serilizeBuild(Building building, OutputStream out) throws IOException
@@ -91,6 +94,34 @@ public class Buildings {
     {
         ObjectInputStream ois = new ObjectInputStream(in);
        return (Building) ois.readObject();
+    }
+
+    public void setBuildingFactory(BuildingFactory f){
+        factory = f;
+    }
+
+    public static Space createSpace(int area){
+        return factory.createSpace(area);
+    }
+
+    public static Space createSpace(int roomsCount, int area) {
+        return factory.createSpace(roomsCount, area);
+    }
+
+    public static Floor createFloor(int spacesCount){
+        return factory.createFloor(spacesCount);
+    }
+
+    public static Floor createFloor(Space[] spaces){
+        return factory.createFloor(spaces);
+    }
+
+    public static Building createBuilding(int floorsCount, int[] spacesCounts){
+        return factory.createBuilding(floorsCount, spacesCounts);
+    }
+
+    public static Building createBuilding(Floor[] floors){
+        return factory.createBuilding(floors);
     }
 }
 

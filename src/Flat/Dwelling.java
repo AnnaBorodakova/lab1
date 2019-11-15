@@ -2,6 +2,8 @@ package Flat;
 
 import Interface.*;
 
+import java.util.Iterator;
+
 public class Dwelling implements Building{
     Floor[] masFloor; //массив этажей
 
@@ -141,6 +143,22 @@ public class Dwelling implements Building{
             }
         }
         Print(arr);
+    }
+
+    public Iterator<Floor> iterator()
+    {
+        return new Iterator<Floor>() {
+            int count = 0;
+            @Override
+            public boolean hasNext() {
+                return count < getCountFloor() && getCountFloor() != 0;
+            }
+
+            @Override
+            public Floor next() {
+                return getFloor(count++);
+            }
+        };
     }
 }
 
